@@ -5,7 +5,7 @@ import pandas as pd
 from dotenv import load_dotenv
 from src.mcqgenerator.utils import read_file, get_table_data
 import streamlit as st
-from src.mcqgenerator.MCQ_generator import generate_evaluate_chain
+from src.mcqgenerator.MCQ_generator import generate_evaluate_chain, ConsoleCallbackHandler
 from src.mcqgenerator.logger import logging, log_filepath
 
 # Loading response json format
@@ -15,7 +15,7 @@ with open(response_filepath, 'r') as file:
 
 
 # Creating title for the App
-st.title('MCQ Generator APP 🦜🔗')
+st.title('MCQ Generator App 🦜🔗')
 
 # Create a form using st.form
 with st.form('user_inputs'):
@@ -67,7 +67,9 @@ with st.form('user_inputs'):
                         'subject' : subject,
                         'difficulty': difficulty,
                         'response_json' : json.dumps(response_json)
-                    }
+                    },
+                    # to get the 'verbose' equivalent
+                    config = {'callbacks' : [ConsoleCallbackHandler]}
                 )
 
                 logging.info(f"Response Text : {response}")
@@ -86,12 +88,27 @@ with st.form('user_inputs'):
 
                 if isinstance(response, dict):
                     # Extracting Quiz data from response
-                    start_pt = response.get('quiz').find("{")
-                    end_pt = response.get('quiz').rfind("}", )+1
+                    ## if StrOutputParser is used :
+                    # start_pt = response.get('quiz').find("{")
+                    # end_pt = response.get('quiz').rfind("}", )+1
 
+                    # quiz = response.get('quiz')[start_pt:end_pt].replace('*', '').replace('#', '')
                     # st.write(json.loads(response))
                     # quiz = json.loads(response.get('quiz'))
-                    quiz = response.get('quiz')[start_pt:end_pt].replace('*', '')
+
+                    ## if StrOutputParser is not used
+                    quiz_data = response.get('quiz').content
+                    start_pt = quiz_data.find("{")
+                    end_pt = quiz_data.rfind("}", )+1
+                    quiz = quiz_data[start_pt:end_pt].replace('*', '').replace('#', '')
+
+                    # st.write(json.loads(response))
+                    # quiz = json.loads(quiz)
+                    quiz_metadata = response.get('quiz').usage_metadata
+
+                    review_data = response.get('review').content
+                    review_metadata = response.get('review').usage_metadata
+
                     # try:
                     #     # quiz = json.loads(response.get('quiz')[start_pt:end_pt].replace('*', ''))
                     #     # quiz = json.loads(response.get('quiz'))
@@ -103,10 +120,29 @@ with st.form('user_inputs'):
                         if table_data is not None:
                             df = pd.DataFrame(table_data)
                             df.index = df.index+1
+                            st.write('\n\n\nQuestionnaire : ')
                             st.table(df)
 
                             # Display a review in a text box
-                            st.text_area(label="MCQ Review", value=response.get('review').replace('*', '').replace('#', ''))
+                            ## when strOuputParser is used
+                            # st.text_area(label="MCQ Review", value=response.get('review').replace('*', '').replace('#', ''))
+
+                            ## when strOuputParser is not used
+                            st.text_area(label="MCQ Review", value=review_data.replace('*', '').replace('#', ''))
+
+                            total_usage_metadata = quiz_metadata.copy()
+                            for attr, val in review_metadata.items():
+                                if attr in total_usage_metadata:
+                                    total_usage_metadata[attr] += val
+                                else:
+                                    total_usage_metadata[attr] = val
+
+                            usage_df = pd.DataFrame([quiz_metadata, review_metadata, total_usage_metadata])
+                            usage_df.index = ['Quiz', 'Review', 'Total']
+                            usage_df.columns = [str.title(col).replace('_', ' ') for col in usage_df.columns]
+
+                            st.write('\n\n\nToken Summary')
+                            st.table(usage_df)
                         
                         else:
                             st.error('Error in Response')

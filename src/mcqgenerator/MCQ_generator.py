@@ -21,6 +21,9 @@ from langchain.schema.runnable import RunnablePassthrough
 from langchain_core.runnables import RunnableSequence
 from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 
+# To generate 'verbose' equivalent output
+from langchain.callbacks.tracers import ConsoleCallbackHandler
+
     # from langchain.callbacks import get_openai_callback
 import PyPDF2
 
@@ -67,7 +70,9 @@ quiz_generation_prompt = PromptTemplate(
 # Creating LLM chain / runnable for input prompt
     # Deprecated; use below implementation
     # quiz_chain = LLMChain(llm = llm, prompt = quiz_generation_prompt, output_key = 'quiz', verbose=True)
-quiz_chain = quiz_generation_prompt | llm | StrOutputParser()
+
+# quiz_chain = quiz_generation_prompt | llm | StrOutputParser() # This gives only response text from the LLM without any other info
+quiz_chain = quiz_generation_prompt | llm       # This gives all the info alongwith response text
 # type(quiz_chain)
 
 
@@ -92,7 +97,8 @@ quiz_evalutaion_prompt = PromptTemplate(
 #Creating LLM chain / runnable for Review Task
     # Deprecated; use below implementation
     # review_chain = LLMChain(llm = llm, prompt = quiz_evalutaion_prompt, output_key = 'review', verbose=True)
-review_chain = quiz_evalutaion_prompt | llm | StrOutputParser()
+# review_chain = quiz_evalutaion_prompt | llm | StrOutputParser() # This gives only response text from the LLM without any other info
+review_chain = quiz_evalutaion_prompt | llm     # This gives all the info alongwith response text
 # type(review_chain)
 
 
