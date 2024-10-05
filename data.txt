@@ -1,0 +1,9 @@
+Background: “Triple whammy” (TW) refers to the simultaneous use of diuretics, renin-angiotensin-aldosterone system inhibitors and nonsteroidal anti-inflammatory drugs (NSAIDs). To date, the risk of developing acute kidney injury (AKI) associated to this combination has not been deeply investigated. The objectives are to analyze the incidence of AKI associated to the exposure to “triple whammy” including all NSAIDs versus non-exposure to this combination. Secondarily, the risk of hospitalization, severe adverse events, requirement of renal replacement therapy and mortality will be assessed. Also, the incidence of AKI associated to the exposure to “triple whammy” versus non-exposure will be analyzed, including only metamizole as NSAID.  
+
+Methods: A systematic literature search of intervention studies and analytical observational studies will be conducted in the Cochrane Library, Medline and EMBASE, among others. AKI 12 months after the last prescription of the triple combination will be the main outcome. Relative frequencies, risk of bias and certainty of evidence will be analyzed. Additionally, sensitivity and subgroup analyses will be performed.  
+
+Results: Once this systematic review has been completed, the results are expected to provide an estimate of the risk associated with this triple combination and the renal variables, in addition to new guidance on the renal treatment of patients potentially receiving triple therapy. 
+
+Conclusions: This is intended to be the first systematic review of observational studies to analyse TW combination and AKI's risk based on well-validated epidemiological databases exploring drug safety issues.
+
+Keywords: Acute kidney injury, triple whammy, diuretics, Angiotensin-Converting Enzyme Inhibitors, Angiotensin II Type 1 Receptor Blockers, Non-Steroidal Anti-Inflammatory Agents, metamizole, dipyrone
