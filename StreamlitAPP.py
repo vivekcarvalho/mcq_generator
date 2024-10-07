@@ -141,7 +141,7 @@ if button and uploaded_file is not None and mcq_count and subject and difficulty
 
                         mcq_out = convert_csv(df_dnld)
 
-                        st.download_button('Download csv', mcq_out, file_name = f"{subject} MCQ", mime='text/csv')
+                        st.download_button('Download csv', mcq_out, file_name = f"{subject} MCQ.csv", mime='text/csv')
 
                         # Display a review in a text box
                         ## when strOuputParser is used
