@@ -20,7 +20,7 @@ st.title('   🦜🔗    MCQ Generator App   🦜🔗')
 # Create a form using st.form
 with st.form('user_inputs'):
     # File upload utility
-    uploaded_file = st.file_uploader('Upload pdf or txt file')
+    uploaded_file = st.file_uploader('Upload pdf or txt File')
 
     # Input Fields
     # Subject of the MCQs
