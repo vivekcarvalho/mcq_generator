@@ -2,10 +2,10 @@
     "1": {
         "mcq": "multiple choice question",
         "option": {
-            "a" : "choice here",
-            "b" : "choice here",
-            "c" : "choice here",
-            "d" : "choice here"
+            "A" : "choice here",
+            "B" : "choice here",
+            "C" : "choice here",
+            "D" : "choice here"
         },
         "correct option" : "correct answer"
     },
@@ -13,10 +13,10 @@
     "2": {
         "mcq": "multiple choice question",
         "option": {
-            "a" : "choice here",
-            "b" : "choice here",
-            "c" : "choice here",
-            "d" : "choice here"
+            "A" : "choice here",
+            "B" : "choice here",
+            "C" : "choice here",
+            "D" : "choice here"
         },
         "correct option" : "correct answer"
     }

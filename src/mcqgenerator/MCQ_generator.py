@@ -52,17 +52,17 @@ llm = ChatGoogleGenerativeAI(
 TEMPLATE = """
 Text : {text}
 You are an expert MCQ maker. Given the above text, it is your job to \
-create a quiz of {number} multiple choice questions for {subject} students in {difficulty} tone. \
+create a quiz of {mcq_count} multiple choice questions for {subject} students in {difficulty} tone. \
 Make sure that the questions are not repeated and check all the questions to be confirming the text as well. \
 Make sure to format your response exactly like below and use it as a guide. \
-ensure to make {number} MCQs
+ensure to make {mcq_count} MCQs with strictly {option_count} options
 
 {response_json}
 
 """
 
 quiz_generation_prompt = PromptTemplate(
-    input_variables=['text', 'number', 'subject', 'difficulty', 'response_json'],
+    input_variables=['text', 'mcq_count', 'option_count', 'subject', 'difficulty', 'response_json'],
     template=TEMPLATE,
 )
 
@@ -105,7 +105,7 @@ review_chain = quiz_evalutaion_prompt | llm     # This gives all the info alongw
 # Creating SequentialChain / RunnableSequence 
     # Deprecated; use below implementation
     # generate_evaluate_chain = SequentialChain(chains=[quiz_chain, review_chain], 
-    #                                           input_variables=['text', 'number', 'subject', 'difficulty', 'response_json'],
+    #                                           input_variables=['text', 'mcq_count', 'option_count', 'subject', 'difficulty', 'response_json'],
     #                                           output_variables = ['quiz', 'review'], 
     #                                           verbose = True)
 
@@ -125,7 +125,8 @@ generate_evaluate_chain = ({'quiz' : quiz_chain, 'subject': itemgetter('subject'
 #     response = generate_evaluate_chain(
 #         {
 #             'text' : text,
-#             'number' : NUMBER,
+#             'mcq_count' : MCQ_COUNT,
+#             'option_count' = option_count,
 #             'subject' : SUBJECT,
 #             'difficulty': DIFFICULTY,
 #             'response_json' : json.dumps(response_json)
