@@ -55,7 +55,8 @@ You are an expert MCQ maker. Given the above text, it is your job to \
 create a quiz of {mcq_count} multiple choice questions for {subject} students in {difficulty} tone. \
 Make sure that the questions are not repeated and check all the questions to be confirming the text as well. \
 Make sure to format your response exactly like below and use it as a guide. \
-ensure to make {mcq_count} MCQs with strictly {option_count} options
+ensure to make {mcq_count} MCQs with strictly {option_count} options. 
+Try to maintain the MCQ and options language as per original input text
 
 {response_json}
 
