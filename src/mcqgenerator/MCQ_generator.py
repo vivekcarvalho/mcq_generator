@@ -8,6 +8,7 @@ from operator import itemgetter
 # Importing LLM Module
 import tqdm as notebook_tqdm
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 
 
 # Importing langchain tools
@@ -37,14 +38,23 @@ load_dotenv()
 
 # Accessing environment variable 
 gemini_key = os.getenv('GOOGLE_API_KEY')
+groq_key = os.getenv("GROQ_API_KEY")
+llm_model = os.getenv("LLM_MODEL")
 
+# llm = ChatGoogleGenerativeAI(
+#     model = 'gemini-1.5-flash',
+#     temperature=0.8, #Creativity index: 0 - less creative, 1 - highly Creative
+#     max_retries=2,
+#     timeout=None,
+#     google_api_key=gemini_key
+# )
 
-llm = ChatGoogleGenerativeAI(
-    model = 'gemini-1.5-flash',
-    temperature=0.8, #Creativity index: 0 - less creative, 1 - highly Creative
-    max_retries=2,
-    timeout=None,
-    google_api_key=gemini_key
+llm = ChatGroq(
+    groq_api_key=groq_key,
+    model=llm_model,
+    verbose=False,
+    temperature=0.8,
+    timeout=None
 )
 
 

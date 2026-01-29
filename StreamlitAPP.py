@@ -128,7 +128,7 @@ if button and uploaded_file is not None and mcq_count and subject and difficulty
                         df = pd.DataFrame(table_data)
                         df.index = df.index+1
                         df_dnld = df
-                        df = df.applymap(lambda x : x.replace(' | ', '<br>'))
+                        df = df.apply(lambda x : x.replace(' | ', '<br>'))
 
                         st.write('<br><b>Questionnaire : </b>', unsafe_allow_html=True)
                         # st.table(df)
