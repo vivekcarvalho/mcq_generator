@@ -20,7 +20,7 @@ st.title('   🦜🔗    MCQ Generator App   🦜🔗')
 # Create a form using st.form
 with st.form('user_inputs'):
     # File upload utility
-    uploaded_file = st.file_uploader('Upload pdf or txt file')
+    uploaded_file = st.file_uploader('Upload pdf or txt File')
 
     # Input Fields
     # Subject of the MCQs
@@ -128,7 +128,7 @@ if button and uploaded_file is not None and mcq_count and subject and difficulty
                         df = pd.DataFrame(table_data)
                         df.index = df.index+1
                         df_dnld = df
-                        df = df.applymap(lambda x : x.replace(' | ', '<br>'))
+                        df = df.apply(lambda x : x.replace(' | ', '<br>'))
 
                         st.write('<br><b>Questionnaire : </b>', unsafe_allow_html=True)
                         # st.table(df)
